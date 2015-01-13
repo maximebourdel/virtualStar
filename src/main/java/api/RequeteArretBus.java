@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class ArretBus implements Requete {
+public class RequeteArretBus implements Requete {
 	private String version = "2.2";
 	private String command;
 	private Collection<Parametre> paramtres;
-	public ArretBus(String version, String command) {
+	public RequeteArretBus(String version, String command) {
 		this.version = version;
 		this.command = command;
 		this.paramtres = new ArrayList<Parametre>();

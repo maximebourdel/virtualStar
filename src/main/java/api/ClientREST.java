@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import metier.ArretBus;
+
 import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -50,7 +52,7 @@ public class ClientREST {
 	public void setRequete(Requete requete) {
 		this.requete = requete;
 	}
-	public  JSONObject execute() throws URISyntaxException, HttpException, IOException{
+	public  ArretBus execute() throws URISyntaxException, HttpException, IOException{
 	
 		String requeteHTTP = "";
 		HttpClient client = new DefaultHttpClient();
@@ -64,7 +66,7 @@ public class ClientREST {
 			int code = status.getJSONObject("opendata").getJSONObject("answer").getJSONObject("status").getJSONObject("@attributes").getInt("code");
 			if ( code==0) {
 				
-				return  openData.getJSONObject("opendata").getJSONObject("answer").getJSONObject("data");
+				//  openData.getJSONObject("opendata").getJSONObject("answer").getJSONObject("data");
 			}
 			return null;
 	}
