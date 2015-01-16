@@ -37,9 +37,10 @@ public class ObservatoireImpl implements Observatoire {
 
 
 	public ArretBus departure() throws URISyntaxException, HttpException, IOException, InterruptedException {
+		
 		this.clientREST.setRequete(this.requete);
 		this.arretBus = this.clientREST.execute();
-		while(true){
+		
 			if(this.arretBusDeparture.getCheckDepartures().hasNext()){
 				this.arretBus = this.clientREST.execute();
 				

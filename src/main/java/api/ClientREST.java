@@ -66,7 +66,7 @@ public class ClientREST {
 			int code = status.getJSONObject("opendata").getJSONObject("answer").getJSONObject("status").getJSONObject("@attributes").getInt("code");
 			if ( code==0) {
 				
-				//  openData.getJSONObject("opendata").getJSONObject("answer").getJSONObject("data");
+				retenData.getJSONObject("opendata").getJSONObject("answer").getJSONObject("data");
 			}
 			return null;
 	}
