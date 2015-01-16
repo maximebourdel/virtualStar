@@ -7,7 +7,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 
 public class ClientMongoDB {
-	private static String host = "";
+	private static String host = "localhost";
 	private static int port = 0;
 	private MongoClient mongoClient;
 	private String dBName;
@@ -16,7 +16,8 @@ public class ClientMongoDB {
 	private static ClientMongoDB clientMongoDBstatic;	
 	
 	private ClientMongoDB() throws UnknownHostException{
-		this.mongoClient = new MongoClient(new ServerAddress(host, port));
+//		this.mongoClient = new MongoClient(new ServerAddress(host, port));
+		this.mongoClient = new MongoClient(new ServerAddress(host));
 	}
 	
 	/**
@@ -50,7 +51,7 @@ public class ClientMongoDB {
 		mongoClient.close();
 	}
 	public DB getDB() {
-		return mongoClient.getDB(dBName);
+		return db;
 	}
 	public void setDB(String dBName){
 		db =  mongoClient.getDB(dBName);

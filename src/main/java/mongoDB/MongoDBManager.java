@@ -1,8 +1,12 @@
 package mongoDB;
 
+import java.net.UnknownHostException;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 
 import metier.ArretBus;
 
@@ -13,7 +17,7 @@ public class MongoDBManager {
 	 * processus a faire pour inserer les donnees d'un objet ArretBus vers la base mongoDB
 	 * @param pArretBus objet ArretBus
 	 */
-	public void mongoDBProcess(ArretBus pArretBus){
+	public void mongoDBStockDataProcess(ArretBus pArretBus){
 		openConnexion();
 		_clientMongoDB.setDB("mongobase");
 		stockArretToMongoDB(pArretBus);
@@ -24,7 +28,7 @@ public class MongoDBManager {
 	 * permet d'inserer un objet Arret dans la base MongoDB
 	 * @param pArretBus objet ArretBus
 	 */
-	public void stockArretToMongoDB(ArretBus pArretBus){
+	private void stockArretToMongoDB(ArretBus pArretBus){
 		DB db=_clientMongoDB.getDB();
 		
 		DBCollection lignesDeBus = db.getCollection("ArretBus");
@@ -43,17 +47,54 @@ public class MongoDBManager {
 		lignesDeBus.insert(arretBusLine);
 
 	}
+	
+	/**
+	 * recupere les donnees de MongoDB
+	 * @param pBaseName nom de la base MongoDB
+	 * @return DBcursor des resultats
+	 */
+	public DBCursor getDBDataFromMongoDb(String pBaseName){
+		//on ouvre la connexion au client mongoDB
+		openConnexion();
+		
+		_clientMongoDB.setDB(pBaseName);
+		
+		DB db =  _clientMongoDB.getDB();
+		
+		DBCollection lignesDeBus = db.getCollection("ArretBus");
+		
+		DBCursor cursor = lignesDeBus.find();
+		
+		//affichage
+		displayDBResults(cursor);
+		
+		closeConnexion();
+		
+		return cursor;
+	}
+	
+	/**
+	 * pour afficher le contenu de la base
+	 * @param pDbCursor
+	 */
+	private void displayDBResults(DBCursor pDbCursor){
+		while(pDbCursor.hasNext()) {
+			DBObject object = pDbCursor.next();
+			System.out.println(object.get("localdatetime") + " / " + object.get("direction")  + " / " + object.get("headSign") + " / " + object.get("excepted") + " / " + object.get("real") + " / " +object.get("vehicle") + " / " + object.get("accurate") );
+		}
+	}
+	
 	/**
 	 * permet d'ouvrir une connexion a MongoDB
 	 */
-	private void openConnexion(){
+	public void openConnexion(){
 //		_clientMongoDB=new ClientMongoDB();
 		_clientMongoDB=ClientMongoDB.getInstance();
 	}
 	/**
 	 * permet de fermer la connexion MongoDB
 	 */
-	private void closeConnexion(){
+	public void closeConnexion(){
 		_clientMongoDB.close();
 	}
 	
