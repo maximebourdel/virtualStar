@@ -1,4 +1,4 @@
-package observatoireStar.engine;
+package engine;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -10,11 +10,11 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 
 import metier.ArretBus;
+import mongoDB.ClientMongoDB;
 import api.ClientREST;
 import api.Requete;
-import observatoireStar.clientMongoDB.ClientMongoDB;
-import observatoireStar.util.ArretBusDeparture;
-import observatoireStar.util.ArretBusDepartureImpl;
+import util.ArretBusDeparture;
+import util.ArretBusDepartureImpl;
 
 public class ObservatoireImpl implements Observatoire {
 	private ClientMongoDB clientMongoDB;

@@ -1,4 +1,4 @@
-package observatoireStar.util;
+package util;
 
 
 public interface ArretBusDeparture {

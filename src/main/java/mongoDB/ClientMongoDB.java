@@ -1,4 +1,4 @@
-package observatoireStar.clientMongoDB;
+package mongoDB;
 
 import java.net.UnknownHostException;
 

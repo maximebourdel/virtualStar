@@ -1,4 +1,4 @@
-package observatoireStar.engine;
+package engine;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
