@@ -36,8 +36,8 @@ public class App {
 		DBCollection collection = dataBase.getCollection("arretbus");
 		BasicDBObject basicDBObject = ArretBusParser.parser(clientREST.execute());
 		if(basicDBObject!=null){
-			//collection.insert(basicDBObject);
-			//System.out.println(basicDBObject);
+			collection.insert(basicDBObject);
+			System.out.println(basicDBObject);
 		}
 		else System.out.println("null");
 		clientMongoDB.close();

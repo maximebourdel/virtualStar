@@ -39,33 +39,17 @@ public class ArretBusParser {
 			//aucune donnee 
 			return null;
 		}
-		arretBus.setPrecision(value.getJSONObject("@attributes").getString("accurate"));
-		arretBus.setNum_vehicule(value.getJSONObject("@attributes").getString("vehicle"));
-		arretBus.setEn_tete(value.getJSONObject("@attributes").getString("headsign"));
-		arretBus.setPrevu(value.getJSONObject("@attributes").getString("expected"));
-		arretBus.setReel(value.getString("content"));
-
-
-		//Arret 
-		BasicDBObject arretMongo = new BasicDBObject();
-		arretMongo.append("description", arretBus.getArret().getDescription());
-		arretMongo.append("id",arretBus.getArret().getId());
-		arretMongo.append("lat", arretBus.getArret().getLat());
-		//ligne
-		BasicDBObject ligneMongo = new BasicDBObject();
-		ligneMongo.append("id", arretBus.getLigne().getId());
-		ligneMongo.append("long_name", arretBus.getLigne().getLong_name());
-		//arretBus
+		
 		BasicDBObject arretBusMongo = new BasicDBObject();
-		arretBusMongo.append(ArretBusAttribut.ARRET, arretMongo);
-		arretBusMongo.append(ArretBusAttribut.LIGNE, ligneMongo);
+		arretBusMongo.append("id_arret",arretBus.getArret().getId());
+		arretBusMongo.append("id_ligne",arretBus.getLigne().getId());
 		arretBusMongo.append(ArretBusAttribut.DATE_REQUETE, arretBus.getDate_requete());
 		arretBusMongo.append(ArretBusAttribut.DIRECTION, arretBus.getDirection());
 		arretBusMongo.append(ArretBusAttribut.EN_TETE, arretBus.getEn_tete());
-		arretBusMongo.append(ArretBusAttribut.NUM_VEHICULE, arretBus.getNum_vehicule());
-		arretBusMongo.append(ArretBusAttribut.PRECISION, arretBus.getPrecision());
-		arretBusMongo.append(ArretBusAttribut.PREVU, arretBus.getPrevu());
-		arretBusMongo.append(ArretBusAttribut.REEL, arretBus.getReel());
+		arretBusMongo.append(ArretBusAttribut.NUM_VEHICULE, value.getJSONObject("@attributes").getString("vehicle"));
+		arretBusMongo.append(ArretBusAttribut.PRECISION, value.getJSONObject("@attributes").getString("accurate"));
+		arretBusMongo.append(ArretBusAttribut.PREVU, value.getJSONObject("@attributes").getString("expected"));
+		arretBusMongo.append(ArretBusAttribut.REEL, value.getString("content"));
 
 		return arretBusMongo;
 
