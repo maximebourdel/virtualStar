@@ -27,7 +27,9 @@ public class App {
 
 		ClientREST clientREST = new ClientREST();
 		clientREST.setRequete(requeteArretBus);
-		ClientMongoDB clientMongoDB = new ClientMongoDB("star");
+		ClientMongoDB clientMongoDB = ClientMongoDB.getInstance();
+		clientMongoDB.setDB("star");
+		
 		MongoClient mongoClient = clientMongoDB.getMongoClient();
 		DB dataBase = clientMongoDB.getDB();
 

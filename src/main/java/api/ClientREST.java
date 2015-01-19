@@ -59,11 +59,13 @@ public class ClientREST {
 		//construction de la requete 
 		requeteHTTP = this.getDomain().toString() + getFormat()+ "/?key="+ getKey() + requete.getRequete();
 		System.out.println(requeteHTTP);
+		System.out.println();
 		HttpGet request = new HttpGet(requeteHTTP);
 		HttpResponse response = client.execute(request);
 		BufferedReader br =  new BufferedReader (new InputStreamReader(response.getEntity().getContent()));
-
-		JSONObject status  = new JSONObject(br.readLine());
+		String answer = br.readLine();
+		JSONObject status  = new JSONObject(answer);
+		System.out.println(answer);
 		JSONObject openData = status;
 		int code = status.getJSONObject("opendata").getJSONObject("answer").getJSONObject("status").getJSONObject("@attributes").getInt("code");
 		if ( code==0) {
