@@ -1,14 +1,12 @@
 package mongoDB;
 
-import java.net.UnknownHostException;
+import metier.ArretBus;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-
-import metier.ArretBus;
 
 public class MongoDBManager {
 	private ClientMongoDB _clientMongoDB;

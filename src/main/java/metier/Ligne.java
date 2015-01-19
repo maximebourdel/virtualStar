@@ -27,6 +27,7 @@ public class Ligne {
 	
 	public Ligne(){};
 	
+	
 	public Ligne(String id, String agence, String numero, String long_name,
 			String type_bus, String route_type, String route_url,
 			String couleur_font, String couleur_texte) {
