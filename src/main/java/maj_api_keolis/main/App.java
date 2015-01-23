@@ -3,16 +3,12 @@ package maj_api_keolis.main;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import maj_api_keolis.mongoDB.ArretBusParser;
 import maj_api_keolis.mongoDB.ClientMongoDB;
 import maj_api_keolis.util.ArretBusAttribut;
 
 import org.apache.http.HttpException;
-import org.xml.sax.SAXException;
 
-import api.ClientGTFS;
 import api.ClientREST;
 import maj_api_keolis.api.RequeteArretBus;
 
@@ -21,29 +17,38 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
 
 public class App {
 	/**
 	 * 
-	 * @param args
+	 * @param args[0]:routeNumber, args[1]:stopNumber, args[2]:directionBool
 	 * @throws URISyntaxException
 	 * @throws HttpException
 	 * @throws IOException
 	 **/
 	public static void main(String[] args) throws URISyntaxException, HttpException, IOException {
 		RequeteArretBus requeteArretBus = new RequeteArretBus();
+		
+		String routeNumber=args[0];
+		String stopNumber=args[1];
+		String directionBool=args[2];
+		
+//		requeteArretBus.addParametre("mode","stopline");
+//		requeteArretBus.addParametre("route][","0004");
+//		requeteArretBus.addParametre("direction][","0");
+//		requeteArretBus.addParametre("stop][","1160");
+		
 		requeteArretBus.addParametre("mode","stopline");
-		requeteArretBus.addParametre("route][","0004");
-		requeteArretBus.addParametre("direction][","0");
-		requeteArretBus.addParametre("stop][","1160");
+		requeteArretBus.addParametre("route][",routeNumber);
+		requeteArretBus.addParametre("direction][",directionBool);
+		requeteArretBus.addParametre("stop][",stopNumber);
 
 		ClientREST clientREST = new ClientREST();
 		clientREST.setRequete(requeteArretBus);
 		ClientMongoDB clientMongoDB = ClientMongoDB.getInstance();
 		clientMongoDB.setDB("star");
 
-		MongoClient mongoClient = clientMongoDB.getMongoClient();
+//		MongoClient mongoClient = clientMongoDB.getMongoClient();
 		DB dataBase = clientMongoDB.getDB();
 
 		DBCollection collection = dataBase.getCollection("arretbus");
