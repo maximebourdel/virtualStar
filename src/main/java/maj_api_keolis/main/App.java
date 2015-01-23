@@ -24,13 +24,13 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
 public class App {
-/**
- * 
- * @param args
- * @throws URISyntaxException
- * @throws HttpException
- * @throws IOException
-
+	/**
+	 * 
+	 * @param args
+	 * @throws URISyntaxException
+	 * @throws HttpException
+	 * @throws IOException
+	 **/
 	public static void main(String[] args) throws URISyntaxException, HttpException, IOException {
 		RequeteArretBus requeteArretBus = new RequeteArretBus();
 		requeteArretBus.addParametre("mode","stopline");
@@ -92,12 +92,5 @@ public class App {
 
 
 	}
- * @throws ParserConfigurationException 
- * @throws SAXException 
-*/
-	
-	public static void main( String args[] ) throws URISyntaxException, HttpException, IOException, SAXException, ParserConfigurationException{
-		ClientGTFS clientGTFS = new ClientGTFS();
-		System.out.println(clientGTFS.execute());
-	}
+
 }
