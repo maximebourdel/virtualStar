@@ -1,5 +1,9 @@
 package maj_api_keolis.mongoDB;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +45,7 @@ public class ArretBusParser {
 		//			return null;
 		//		}
 
+		
 		BasicDBObject arretBusMongo = new BasicDBObject();
 		arretBusMongo.append("id_arret",jsonObject.getJSONObject("stopline").getString("stop"));
 		arretBusMongo.append("id_ligne",jsonObject.getJSONObject("stopline").getString("route"));
@@ -51,9 +56,25 @@ public class ArretBusParser {
 		arretBusMongo.append(ArretBusAttribut.PRECISION, value.getJSONObject("@attributes").getString("accurate"));
 		arretBusMongo.append(ArretBusAttribut.PREVU, value.getJSONObject("@attributes").getString("expected"));
 		arretBusMongo.append(ArretBusAttribut.REEL, value.getString("content"));
-
+		
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat ("YYYY-mm-dd'T'hh:MM:ss");
+			Date dateExpected 	= sdf.parse(value.getJSONObject("@attributes").getString("expected"));
+			Date datePrevue 	= sdf.parse(value.getString("content"));
+			
+			int diff_TR = (int) datePrevue.getTime() - (int) dateExpected.getTime();
+			
+			arretBusMongo.append(ArretBusAttribut.DIFF_TR, diff_TR/1000);
+			
+		} catch (JSONException e) {
+			System.out.println("Erreur du JSON");
+			e.printStackTrace();
+		} catch (ParseException e) {
+			System.out.println("Erreur de PARSE");
+			e.printStackTrace();
+		}
+		
 		return arretBusMongo;
-
 		
 	}
 

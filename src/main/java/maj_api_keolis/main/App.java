@@ -3,16 +3,12 @@ package maj_api_keolis.main;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import maj_api_keolis.mongoDB.ArretBusParser;
 import maj_api_keolis.mongoDB.ClientMongoDB;
 import maj_api_keolis.util.ArretBusAttribut;
 
 import org.apache.http.HttpException;
-import org.xml.sax.SAXException;
 
-import api.ClientGTFS;
 import api.ClientREST;
 import maj_api_keolis.api.RequeteArretBus;
 
@@ -21,29 +17,38 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
 
 public class App {
-/**
- * 
- * @param args
- * @throws URISyntaxException
- * @throws HttpException
- * @throws IOException
-
+	/**
+	 * 
+	 * @param args[0]:routeNumber, args[1]:stopNumber, args[2]:directionBool
+	 * @throws URISyntaxException
+	 * @throws HttpException
+	 * @throws IOException
+	 **/
 	public static void main(String[] args) throws URISyntaxException, HttpException, IOException {
 		RequeteArretBus requeteArretBus = new RequeteArretBus();
+		
+		String routeNumber=args[0];
+		String stopNumber=args[1];
+		String directionBool=args[2];
+		
+//		requeteArretBus.addParametre("mode","stopline");
+//		requeteArretBus.addParametre("route][","0004");
+//		requeteArretBus.addParametre("direction][","0");
+//		requeteArretBus.addParametre("stop][","1160");
+		
 		requeteArretBus.addParametre("mode","stopline");
-		requeteArretBus.addParametre("route][","0004");
-		requeteArretBus.addParametre("direction][","0");
-		requeteArretBus.addParametre("stop][","1160");
+		requeteArretBus.addParametre("route][",routeNumber);
+		requeteArretBus.addParametre("direction][",directionBool);
+		requeteArretBus.addParametre("stop][",stopNumber);
 
 		ClientREST clientREST = new ClientREST();
 		clientREST.setRequete(requeteArretBus);
 		ClientMongoDB clientMongoDB = ClientMongoDB.getInstance();
 		clientMongoDB.setDB("star");
 
-		MongoClient mongoClient = clientMongoDB.getMongoClient();
+//		MongoClient mongoClient = clientMongoDB.getMongoClient();
 		DB dataBase = clientMongoDB.getDB();
 
 		DBCollection collection = dataBase.getCollection("arretbus");
@@ -85,19 +90,12 @@ public class App {
 		while(cursor.hasNext()) {
 			DBObject object = cursor.next();
 			System.out.println("****************************************");
-			System.out.println("\n id arret : " + object.get("id_arret") + "\n id ligne : " + object.get("id_ligne") + "\n date requete : " + object.get("date_requete") + "\n direction : " + object.get("direction") + "\n en tête : " + object.get("en_tete") + "\n prevu : " + object.get("prevu") + "\n reel : " + object.get("reel") + "\n num vehic : " + object.get("num_vehicule") + "\n precision : " + object.get("precision"));
+			System.out.println("\n id arret : " + object.get("id_arret") + "\n id ligne : " + object.get("id_ligne") + "\n date requete : " + object.get("date_requete") + "\n direction : " + object.get("direction") + "\n en tête : " + object.get("en_tete") + "\n prevu : " + object.get("prevu") + "\n reel : " + object.get("reel") + "\n num vehic : " + object.get("num_vehicule") + "\n precision : " + object.get("precision") +  "\n diff_TR : " + object.get("diff_TR"));
 		}
 		cursor.close();
 		clientMongoDB.close();
 
 
 	}
- * @throws ParserConfigurationException 
- * @throws SAXException 
-*/
-	
-	public static void main( String args[] ) throws URISyntaxException, HttpException, IOException, SAXException, ParserConfigurationException{
-		ClientGTFS clientGTFS = new ClientGTFS();
-		System.out.println(clientGTFS.execute());
-	}
+
 }

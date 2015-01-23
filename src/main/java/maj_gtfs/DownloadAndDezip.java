@@ -1,6 +1,8 @@
 package maj_gtfs;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Cette classe va t�l�charger le .zip GTFS, puis le d�zipper dans un dossier.
@@ -9,9 +11,8 @@ import java.io.File;
  */
 public class DownloadAndDezip {
 
-    public static void main(String[] args) throws Exception {
-        
-    	//Telechargement.
+	public void downloadAndDezip(String pUrl){
+		//Telechargement.
         String url = "http://data.keolis-rennes.com/fileadmin/OpenDataFiles/GTFS/GTFS-20150120.zip";
         System.out.println("Downloading GTFS files...");
         Download.getFile(url);
@@ -24,7 +25,15 @@ public class DownloadAndDezip {
 		File zipfile = new File("GTFS-20150120.zip");
         File folder = new File("GTFS_Files_Folder");
         System.out.println("Dezipping GTFS files...");
-        Dezipping.unzip(zipfile, folder);
+        try {
+			Dezipping.unzip(zipfile, folder);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         System.out.println("...GTFS files dezipped.");
-    }
+	}
 }

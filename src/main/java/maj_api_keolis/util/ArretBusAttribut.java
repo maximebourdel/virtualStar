@@ -19,4 +19,6 @@ public class ArretBusAttribut {
 	public static String NUM_VEHICULE = "num_vehicule";
 	//stopline[i] -> departures -> departure[0] : accurate
 	public static String PRECISION = "precision";
+	//calcul
+	public static String DIFF_TR = "diff_TR";
 }
