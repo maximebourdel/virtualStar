@@ -28,6 +28,8 @@ public class ArretBus {
 	private String num_vehicule;
 	//stopline[i] -> departures -> departure[0] : accurate
 	private String precision;
+	//calcul
+	private String diff_TR;
 	
 	public ArretBus(){};
 	

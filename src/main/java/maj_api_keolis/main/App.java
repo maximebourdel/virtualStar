@@ -75,7 +75,7 @@ public class App {
 		while(cursor.hasNext()) {
 			DBObject object = cursor.next();
 			System.out.println("****************************************");
-			System.out.println("\n id arret : " + object.get("id_arret") + "\n id ligne : " + object.get("id_ligne") + "\n date requete : " + object.get("date_requete") + "\n direction : " + object.get("direction") + "\n en tête : " + object.get("en_tete") + "\n prevu : " + object.get("prevu") + "\n reel : " + object.get("reel") + "\n num vehic : " + object.get("num_vehicule") + "\n precision : " + object.get("precision"));
+			System.out.println("\n id arret : " + object.get("id_arret") + "\n id ligne : " + object.get("id_ligne") + "\n date requete : " + object.get("date_requete") + "\n direction : " + object.get("direction") + "\n en tête : " + object.get("en_tete") + "\n prevu : " + object.get("prevu") + "\n reel : " + object.get("reel") + "\n num vehic : " + object.get("num_vehicule") + "\n precision : " + object.get("precision") +  "\n diff_TR : " + object.get("diff_TR"));
 		}
 		cursor.close();
 		clientMongoDB.close();
