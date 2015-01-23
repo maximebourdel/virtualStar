@@ -3,12 +3,16 @@ package maj_api_keolis.main;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import maj_api_keolis.mongoDB.ArretBusParser;
 import maj_api_keolis.mongoDB.ClientMongoDB;
 import maj_api_keolis.util.ArretBusAttribut;
 
 import org.apache.http.HttpException;
+import org.xml.sax.SAXException;
 
+import api.ClientGTFS;
 import api.ClientREST;
 import maj_api_keolis.api.RequeteArretBus;
 
@@ -20,6 +24,12 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
 public class App {
+/**
+ * 
+ * @param args
+ * @throws URISyntaxException
+ * @throws HttpException
+ * @throws IOException
 
 	public static void main(String[] args) throws URISyntaxException, HttpException, IOException {
 		RequeteArretBus requeteArretBus = new RequeteArretBus();
@@ -82,5 +92,12 @@ public class App {
 
 
 	}
-
+ * @throws ParserConfigurationException 
+ * @throws SAXException 
+*/
+	
+	public static void main( String args[] ) throws URISyntaxException, HttpException, IOException, SAXException, ParserConfigurationException{
+		ClientGTFS clientGTFS = new ClientGTFS();
+		System.out.println(clientGTFS.execute());
+	}
 }
