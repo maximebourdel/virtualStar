@@ -67,7 +67,7 @@ public class ArretBusParser {
 			//soustraction des deux dates
 			long diff_TR =  dateReel.getTime() -  dateExpected.getTime();
 			
-			arretBusMongo.append(ArretBusAttribut.DIFF_TR, diff_TR/1000);
+			arretBusMongo.append(ArretBusAttribut.DIFF_TR, Long.toString(diff_TR/1000));
 			
 		} catch (JSONException e) {
 			System.out.println("Erreur du JSON");
