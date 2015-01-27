@@ -3,6 +3,7 @@ package maj_api_keolis.mongoDB;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,11 +59,13 @@ public class ArretBusParser {
 		arretBusMongo.append(ArretBusAttribut.REEL, value.getString("content"));
 		
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat ("YYYY-mm-dd'T'hh:MM:ss");
-			Date dateExpected 	= sdf.parse(value.getJSONObject("@attributes").getString("expected"));
-			Date datePrevue 	= sdf.parse(value.getString("content"));
 			
-			int diff_TR = (int) datePrevue.getTime() - (int) dateExpected.getTime();
+			SimpleDateFormat sdf = new SimpleDateFormat ("YYYY-MM-dd'T'hh:mm:ss");
+			//conversion des strings dates en format Date
+			Date dateExpected 	= sdf.parse(value.getJSONObject("@attributes").getString("expected"));
+			Date dateReel 	= sdf.parse(value.getString("content"));
+			//soustraction des deux dates
+			long diff_TR =  dateReel.getTime() -  dateExpected.getTime();
 			
 			arretBusMongo.append(ArretBusAttribut.DIFF_TR, diff_TR/1000);
 			
