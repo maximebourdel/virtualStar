@@ -29,13 +29,16 @@ public class MainGTFS {
 		MongoClient mongoClient = clientMongoDB.getMongoClient();
 		DB dataBase = clientMongoDB.getDB();
 		//création/utilisation/suppression de la table de nom "LigneDeBus"
-		DBCollection lignesDeBus = dataBase.getCollection("ligne");
 		GTFSParser gtfsp; 
+		
+		DBCollection lignesDeBus = dataBase.getCollection("ligne");
+		lignesDeBus.drop();
 		gtfsp = new GTFSParserLigne(lignesDeBus);
 		gtfsp.execute("GTFS_Files_Folder/routes.txt");
 		gtfsp.execute("GTFS_Files_Folder/routes_additionals.txt");
 		
 		DBCollection arretDeBus = dataBase.getCollection("arret");
+		arretDeBus.drop();
 		gtfsp = new GTFSParserLigne(arretDeBus);
 		gtfsp.execute("GTFS_Files_Folder/stops.txt");
 		
