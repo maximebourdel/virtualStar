@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class DownloadAndDezip {
 
-	public void downloadAndDezip(String pUrl){
+	public static void downloadAndDezip(String pUrl){
 		//Telechargement.
         String url = "http://data.keolis-rennes.com/fileadmin/OpenDataFiles/GTFS/GTFS-20150120.zip";
         System.out.println("Downloading GTFS files...");

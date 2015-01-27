@@ -1,6 +1,9 @@
 package maj_gtfs;
 
+import java.net.URISyntaxException;
+
 import maj_api_keolis.mongoDB.ClientMongoDB;
+import api.ClientGTFS;
 
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -9,6 +12,16 @@ import com.mongodb.MongoClient;
 public class MainGTFS {
 
 	public static void main(String[] args) {
+		
+		ClientGTFS clientGTFS;
+		try {
+			clientGTFS = new ClientGTFS();
+			DownloadAndDezip.downloadAndDezip(clientGTFS.getUrlGtfsData());
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		ClientMongoDB clientMongoDB = ClientMongoDB.getInstance();
 		clientMongoDB.setDB("star");
