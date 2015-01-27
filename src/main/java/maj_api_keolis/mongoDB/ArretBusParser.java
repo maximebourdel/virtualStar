@@ -65,7 +65,7 @@ public class ArretBusParser {
 			Date dateExpected 	= sdf.parse(value.getJSONObject("@attributes").getString("expected"));
 			Date dateReel 	= sdf.parse(value.getString("content"));
 			//soustraction des deux dates
-			long diff_TR =  dateReel.getTime() -  dateExpected.getTime();
+			long diff_TR = dateExpected.getTime() - dateReel.getTime();
 			
 			arretBusMongo.append(ArretBusAttribut.DIFF_TR, Long.toString(diff_TR/1000));
 			
