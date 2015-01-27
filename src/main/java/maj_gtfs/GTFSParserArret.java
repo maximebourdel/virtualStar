@@ -33,7 +33,7 @@ public class GTFSParserArret implements GTFSParser{
 				String[] routesTab = line.split(dbSplitBy);
 				BasicDBObject dbLine = new BasicDBObject(); 
 
-				dbLine.append(ArretAttribut.ID, removeQuotes(routesTab[0]));
+				dbLine.append(ArretAttribut.STOP_ID, removeQuotes(routesTab[0]));
 				dbLine.append(ArretAttribut.CODE, removeQuotes(routesTab[1]));
 				dbLine.append(ArretAttribut.NAME, removeQuotes(routesTab[2]));
 				dbLine.append(ArretAttribut.DESC, removeQuotes(routesTab[3]));
