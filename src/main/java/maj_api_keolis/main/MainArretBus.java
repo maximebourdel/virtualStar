@@ -3,12 +3,13 @@ package maj_api_keolis.main;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import org.apache.http.HttpException;
-
 import maj_api_keolis.api.RequeteArretBus;
 import maj_api_keolis.mongoDB.ArretBusParser;
 import maj_api_keolis.mongoDB.ClientMongoDB;
 import maj_api_keolis.util.ArretBusAttribut;
+
+import org.apache.http.HttpException;
+
 import api.ClientREST;
 
 import com.mongodb.BasicDBObject;
@@ -17,8 +18,37 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 
 public class MainArretBus {
+	private ClientREST clientREST;
+	private ClientMongoDB clientMongoDB;
+	
+	
+	public MainArretBus(ClientREST clientREST, ClientMongoDB clientMongoDB) {
+		this.clientREST = clientREST;
+		this.clientMongoDB = clientMongoDB;
+	}
 
-	public static void execute(String routeNumber, String stopNumber, String directionBool) throws URISyntaxException, HttpException, IOException{
+
+	public ClientREST getClientREST() {
+		return clientREST;
+	}
+
+
+	public void setClientREST(ClientREST clientREST) {
+		this.clientREST = clientREST;
+	}
+
+
+	public ClientMongoDB getClientMongoDB() {
+		return clientMongoDB;
+	}
+
+
+	public void setClientMongoDB(ClientMongoDB clientMongoDB) {
+		this.clientMongoDB = clientMongoDB;
+	}
+
+
+	public  void execute(String routeNumber, String stopNumber, String directionBool) throws URISyntaxException, HttpException, IOException{
 		RequeteArretBus requeteArretBus = new RequeteArretBus();
 
 		requeteArretBus.addParametre("mode","stopline");
@@ -26,13 +56,12 @@ public class MainArretBus {
 		requeteArretBus.addParametre("direction][",directionBool);
 		requeteArretBus.addParametre("stop][",stopNumber);
 
-		ClientREST clientREST = new ClientREST();
-		clientREST.setRequete(requeteArretBus);
-		ClientMongoDB clientMongoDB = ClientMongoDB.getInstance();
-		clientMongoDB.setDB("star");
+		
+		this.clientREST.setRequete(requeteArretBus);
+		this.clientMongoDB.setDB("star");
 
 		//		MongoClient mongoClient = clientMongoDB.getMongoClient();
-		DB dataBase = clientMongoDB.getDB();
+		DB dataBase = this.clientMongoDB.getDB();
 
 		DBCollection collection = dataBase.getCollection("arretbus");
 		BasicDBObject basicDBObject = ArretBusParser.parser(clientREST.execute());
