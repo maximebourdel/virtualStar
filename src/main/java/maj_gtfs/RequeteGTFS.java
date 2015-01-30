@@ -2,7 +2,7 @@ package maj_gtfs;
 
 import api.Requete;
 
-public class RequeteGTFS implements Requete {
+public class RequeteGTFS extends Requete {
 	
 	public String getCommand() {
 		// TODO Auto-generated method stub
