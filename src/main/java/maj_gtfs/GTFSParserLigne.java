@@ -33,15 +33,15 @@ public class GTFSParserLigne implements GTFSParser {
 				String[] routesTab = line.split(dbSplitBy);
 				BasicDBObject dbLine = new BasicDBObject(); 
 
-				dbLine.append(LigneAttribut.ID_LIGNE, removeQuotes(routesTab[0]));
+				dbLine.append(LigneAttribut.LIGNE_ID, removeQuotes(routesTab[0]));
 				dbLine.append(LigneAttribut.ID_AGENCY, removeQuotes(routesTab[1]));
 				dbLine.append(LigneAttribut.ROAS_SN, removeQuotes(routesTab[2]));
-				dbLine.append(LigneAttribut.LIGNE_LN, removeQuotes(routesTab[3]));
-				dbLine.append(LigneAttribut.LIGNE_DESC, removeQuotes(routesTab[4]));
-				dbLine.append(LigneAttribut.LIGNE_TYPE, removeQuotes(routesTab[5]));
-				dbLine.append(LigneAttribut.LIGNE_URL, removeQuotes(routesTab[6]));
-				dbLine.append(LigneAttribut.LIGNE_COLOR, removeQuotes(routesTab[7]));
-				dbLine.append(LigneAttribut.LIGNE_COLORFONT, removeQuotes(routesTab[8]));
+				dbLine.append(LigneAttribut.LN, removeQuotes(routesTab[3]));
+				dbLine.append(LigneAttribut.DESC, removeQuotes(routesTab[4]));
+				dbLine.append(LigneAttribut.TYPE, removeQuotes(routesTab[5]));
+				dbLine.append(LigneAttribut.URL, removeQuotes(routesTab[6]));
+				dbLine.append(LigneAttribut.COLOR, removeQuotes(routesTab[7]));
+				dbLine.append(LigneAttribut.COLORFONT, removeQuotes(routesTab[8]));
 
 				collectionTxtToMongoDB.insert(dbLine);
 			}
