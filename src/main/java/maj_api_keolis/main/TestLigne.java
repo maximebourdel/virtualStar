@@ -21,13 +21,8 @@ public class TestLigne {
 	public static void main(String[] args) throws URISyntaxException, HttpException, IOException {
 		MainArretBus mainArretBus =  new MainArretBus(new ClientREST(), ClientMongoDB.getInstance());
 		RequeteArretBus requeteArretBus = new RequeteArretBus();
-		String route = "0008";//args[0];
-		String direction = "1";//args[1];
-		//		
-		//		requeteArretBus.addParametre("mode","line");
-		//		requeteArretBus.addParametre("route",route);
-		//		requeteArretBus.addParametre("direction",direction);
-
+		String route = args[0];
+		String direction = args[1];
 		requeteArretBus.addParametre("mode","line");
 		requeteArretBus.addParametre("route",route);
 		requeteArretBus.addParametre("direction",direction);
