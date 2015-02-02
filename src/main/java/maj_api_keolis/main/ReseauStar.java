@@ -35,15 +35,15 @@ public class ReseauStar {
 		this.lignes = ligneStar();
 		if(this.lignes != null){
 			for(int i = 0; i < this.lignes.length - 1; i++){
-				System.out.println("ligne  : " + lignes[i]);
+//				System.out.println("ligne  : " + lignes[i]);
 				for(int k = 0; k < Direction.directions.length; k++){
-					System.out.println("Direction " + Direction.directions[k]);
+//					System.out.println("Direction " + Direction.directions[k]);
 					String [] stops = this.makeRequeteArretBus(this.lignes[i], Direction.directions[k]);
 					if(stops != null){
-						for( int j = 0 ; j < stops.length ; j ++)
-							
-							System.out.println(" Stop  " + stops[j]);
-						//this.mainArretBus.execute(this.lignes[i], stops[j], Direction.directions[k]);
+						for( int j = 0 ; j < stops.length ; j ++){
+//							System.out.println(" Stop  " + stops[j]);
+							this.mainArretBus.execute(this.lignes[i], stops[j], Direction.directions[k]);
+						}
 					}
 				}
 			}
@@ -57,7 +57,7 @@ public class ReseauStar {
 		DBCollection collection = dataBase.getCollection(NomCollectionMongoDB.LIGNE);
 		DBCursor dbCursor =  collection.find();
 		int lengthDbCursor = dbCursor.count();
-		
+
 		System.out.println("Count  "+ lengthDbCursor);
 		if(lengthDbCursor == 0)
 			return null;
@@ -67,17 +67,11 @@ public class ReseauStar {
 		while(dbCursor.hasNext()){
 			DBObject obj = dbCursor.next();
 			routes[i++] = (String) obj.get(LigneAttribut.LIGNE_ID);
-			
+
 		}
 		dbCursor.close();
-		ligneToString(routes);
 		return routes;
 
-	}
-	public void ligneToString (String [] routes){
-		for(int i = 0 ; i <  3 ; i++){
-			System.out.println(" Ligne  " + routes[i]);
-		}
 	}
 	public String[] makeRequeteArretBus (String route, String direction) throws URISyntaxException, HttpException, IOException{
 		RequeteArretBus requeteArretBus = new RequeteArretBus();
