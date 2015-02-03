@@ -58,7 +58,7 @@ public class ArretBusParser {
 		arretBusMongo.append(ArretBusAttribut.REEL, value.getString("content"));
 		
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat ("YYYY-mm-dd'T'hh:MM:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat ("YYYY-mm-dd'T'HH:MM:ss");
 			Date dateExpected 	= sdf.parse(value.getJSONObject("@attributes").getString("expected"));
 			Date datePrevue 	= sdf.parse(value.getString("content"));
 			
