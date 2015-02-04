@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,6 +80,17 @@ public class ArretBusParser {
 		
 		return arretBusMongo;
 		
+	}
+	/**
+	 * Le parseur getbusdeparture en mode "line"
+	 * @param jsonObject
+	 * @return collection de basicDBObject
+	 */
+	public static List<BasicDBObject> ligneParser(JSONObject jsonObject){
+		
+		
+			
+		return null;
 	}
 
 }

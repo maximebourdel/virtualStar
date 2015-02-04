@@ -37,24 +37,6 @@ public class ClientGTFS implements Client {
 		this.domain = "http://data.keolis-rennes.com/fileadmin/OpenDataFiles/GTFS/feed";
 	}
 
-//	public String execute() throws URISyntaxException, HttpException, IOException, ParserConfigurationException, SAXException{
-//		HttpClient client = new DefaultHttpClient();
-//		HttpGet request = new HttpGet(domain);
-//		HttpResponse response = client.execute(request);
-//		HttpEntity resEntity = response.getEntity();
-//		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-//		DocumentBuilder builder = factory.newDocumentBuilder();
-//		NodeList nodes= builder.parse(domain).getElementsByTagName("entry");
-//		
-//		if(nodes.getLength()!=0)
-//			System.out.println(nodes.item(nodes.getLength()-1).getChildNodes());
-//		NodeList link = nodes.item(nodes.getLength()-1).getChildNodes();
-//		System.out.println(link.item(4).getFirstChild().getTextContent());
-//		
-//		
-//		return   null;
-//
-//	}
 	
 	/**
 	 * connexion a l'url

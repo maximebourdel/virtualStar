@@ -3,18 +3,13 @@ package maj_api_keolis.main;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import maj_api_keolis.api.RequeteArretBus;
+import maj_api_keolis.mongoDB.ClientMongoDB;
+import maj_api_keolis.mongoDB.LigneParser;
+
 import org.apache.http.HttpException;
 
 import api.ClientREST;
-
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-
-import maj_api_keolis.api.RequeteArretBus;
-import maj_api_keolis.mongoDB.ArretBusParser;
-import maj_api_keolis.mongoDB.ClientMongoDB;
-import maj_api_keolis.mongoDB.LigneParser;
 
 public class TestLigne {
 
