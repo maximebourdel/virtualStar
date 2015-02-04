@@ -29,9 +29,9 @@ public class App {
 	public static void main(String[] args) throws URISyntaxException, HttpException, IOException {
 		RequeteArretBus requeteArretBus = new RequeteArretBus();
 		
-		String routeNumber=args[0];
-		String stopNumber=args[1];
-		String directionBool=args[2];
+		String routeNumber = args[0];
+		String stopNumber = args[1];
+		String directionBool = args[2];
 		
 //		requeteArretBus.addParametre("mode","stopline");
 //		requeteArretBus.addParametre("route][","0004");
@@ -54,7 +54,6 @@ public class App {
 		DBCollection collection = dataBase.getCollection("arretbus");
 		BasicDBObject basicDBObject = ArretBusParser.parser(clientREST.execute());
 		
-		
 		//On construit ici un objet ne contenant que les donnes : "prevu" et "vehicule" (nos attributs a tester)
 		DBObject searchIfArretBusAlreadyExist = collection.findOne(
 				new BasicDBObject()
@@ -63,8 +62,7 @@ public class App {
 		);
 		
 		//si on a bien parse notre objet et qu'il n'existe pas deja, on l'insere
-		if(basicDBObject!=null){
-			//
+		if(basicDBObject != null){
 			if (searchIfArretBusAlreadyExist != null) {
 				
 				//variable temporaire qui représentera notre nouvelle ligne a update

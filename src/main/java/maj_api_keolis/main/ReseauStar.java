@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import maj_api_keolis.api.RequeteArretBus;
+import maj_api_keolis.mongoDB.ArretBusLigneParser;
 import maj_api_keolis.mongoDB.ClientMongoDB;
 import maj_api_keolis.mongoDB.LigneParser;
 import maj_api_keolis.util.Direction;
@@ -23,28 +24,23 @@ public class ReseauStar {
 	private MainArretBus mainArretBus;
 	private ClientREST clientREST;
 	private ClientMongoDB clientMongoDB;
+	private ArretBusLigneParser arretBusLigneParser;
 	private String lignes[] ;
 
 	public ReseauStar(ClientREST clientREST, ClientMongoDB clientMongoDB) {
 		this.mainArretBus = new MainArretBus(clientREST, clientMongoDB);
 		this.clientREST = clientREST;
 		this.clientMongoDB = clientMongoDB;
+		this.arretBusLigneParser = new ArretBusLigneParser(clientREST, clientMongoDB);
 	}
 
 	public void execute() throws URISyntaxException, HttpException, IOException{
 		this.lignes = ligneStar();
 		if(this.lignes != null){
 			for(int i = 0; i < this.lignes.length - 1; i++){
-//				System.out.println("ligne  : " + lignes[i]);
+				//				System.out.println("ligne  : " + lignes[i]);
 				for(int k = 0; k < Direction.directions.length; k++){
-//					System.out.println("Direction " + Direction.directions[k]);
-					String [] stops = this.makeRequeteArretBus(this.lignes[i], Direction.directions[k]);
-					if(stops != null){
-						for( int j = 0 ; j < stops.length ; j ++){
-//							System.out.println(" Stop  " + stops[j]);
-							this.mainArretBus.execute(this.lignes[i], stops[j], Direction.directions[k]);
-						}
-					}
+					this.arretBusLigneParser.execute(lignes[i], Direction.directions[k]);
 				}
 			}
 		}

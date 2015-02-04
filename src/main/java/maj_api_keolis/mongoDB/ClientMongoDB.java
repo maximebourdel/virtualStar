@@ -2,7 +2,12 @@ package maj_api_keolis.mongoDB;
 
 import java.net.UnknownHostException;
 
+import maj_api_keolis.util.ArretBusAttribut;
+
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 public class ClientMongoDB {
@@ -48,5 +53,37 @@ public class ClientMongoDB {
 	}
 	public void setDB(String dBName){
 		db = mongoClient.getDB(dBName);
+	}
+	public void insert(DBCollection collection, BasicDBObject dBbasicDBObject){
+		DBCollection dBcollection = collection;
+
+
+		//On construit ici un objet ne contenant que les donnes : "prevu" et "vehicule" (nos attributs a tester)
+		DBObject searchIfArretBusAlreadyExist = dBcollection.findOne(
+				new BasicDBObject()
+				.append(ArretBusAttribut.PREVU, dBbasicDBObject.get(ArretBusAttribut.PREVU))//on vérifie la date
+				.append(ArretBusAttribut.NUM_VEHICULE, dBbasicDBObject.get(ArretBusAttribut.NUM_VEHICULE))//on vérifie le numéro du vehicule
+				);
+
+		//si on a bien parse notre objet et qu'il n'existe pas deja, on l'insere
+		if(dBbasicDBObject!=null){
+			//
+			if (searchIfArretBusAlreadyExist != null) {
+
+				//variable temporaire qui représentera notre nouvelle ligne a update
+				BasicDBObject UpdatedBasicDBObject = dBbasicDBObject;
+
+				//modification des nouvelles donnees
+				UpdatedBasicDBObject.put(ArretBusAttribut.DATE_REQUETE,dBbasicDBObject.get(ArretBusAttribut.DATE_REQUETE));
+				UpdatedBasicDBObject.put(ArretBusAttribut.REEL,dBbasicDBObject.get(ArretBusAttribut.REEL));
+				UpdatedBasicDBObject.put(ArretBusAttribut.PRECISION,dBbasicDBObject.get(ArretBusAttribut.PRECISION));
+
+				//on modifie la date prévue seulementde notre collection
+				dBcollection.update(searchIfArretBusAlreadyExist, UpdatedBasicDBObject);
+
+			} else {//on a bien parse notre objet et qu'il n'existe pas deja, on l'insere
+				dBcollection.insert(dBbasicDBObject);
+			} 
+		} 
 	}
 }
