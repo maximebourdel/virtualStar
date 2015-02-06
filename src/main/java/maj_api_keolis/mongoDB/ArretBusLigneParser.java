@@ -25,6 +25,7 @@ public class ArretBusLigneParser {
 		this.clientMongoDB = clientMongoDB;
 	}
 	public void execute(String route, String direction){
+		System.out.println("Ligne : " + route + " Direction : " + direction);
 		RequeteArretBus requeteLigne =  new RequeteArretBus();
 		requeteLigne.addParametre("mode", "line");
 		requeteLigne.addParametre("route", route);
@@ -36,10 +37,12 @@ public class ArretBusLigneParser {
 			this.clientMongoDB.setDB("star");
 			DB db = this.clientMongoDB.getDB();
 			DBCollection collection = db.getCollection(NomCollectionMongoDB.ARRETBUS);
-			Iterator<BasicDBObject> it = basicDBObjects.iterator();
-			while (it.hasNext()) {
-				BasicDBObject basicDBObject = (BasicDBObject) it.next();
-				this.clientMongoDB.insert(collection, basicDBObject);
+			if (basicDBObjects != null) {
+				Iterator<BasicDBObject> it = basicDBObjects.iterator();
+				while (it.hasNext()) {
+					BasicDBObject basicDBObject = (BasicDBObject) it.next();
+					this.clientMongoDB.insert(collection, basicDBObject);
+				}
 			}
 		} catch (URISyntaxException e) {
 

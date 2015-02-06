@@ -35,13 +35,6 @@ public class ClientMongoDB {
 		}
 		return clientMongoDBstatic;
 	}
-	// public ClientMongoDB() throws UnknownHostException {
-	// this.mongoClient = new MongoClient(new ServerAddress(host, port));
-	// }
-	// public ClientMongoDB( String dBName) throws UnknownHostException {
-	// this.mongoClient = new MongoClient(new ServerAddress(host, port));
-	// this.dBName = dBName;
-	// }
 	public MongoClient getMongoClient(){
 		return mongoClient;
 	}
