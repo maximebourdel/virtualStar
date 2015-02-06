@@ -7,7 +7,6 @@ import api.ClientGTFS;
 
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.MongoClient;
 
 public class MainGTFS {
 
@@ -25,8 +24,6 @@ public class MainGTFS {
 		
 		ClientMongoDB clientMongoDB = ClientMongoDB.getInstance();
 		clientMongoDB.setDB("star");
-		//on se connecte à la base de données de nom "test"
-		MongoClient mongoClient = clientMongoDB.getMongoClient();
 		DB dataBase = clientMongoDB.getDB();
 		//création/utilisation/suppression de la table de nom "LigneDeBus"
 		GTFSParser gtfsp; 

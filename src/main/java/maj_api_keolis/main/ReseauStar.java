@@ -21,14 +21,14 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 public class ReseauStar {
-	private MainArretBus mainArretBus;
 	private ClientREST clientREST;
 	private ClientMongoDB clientMongoDB;
 	private ArretBusLigneParser arretBusLigneParser;
 	private String lignes[] ;
+	private final int limite = 3;
 
 	public ReseauStar(ClientREST clientREST, ClientMongoDB clientMongoDB) {
-		this.mainArretBus = new MainArretBus(clientREST, clientMongoDB);
+		new MainArretBus(clientREST, clientMongoDB);
 		this.clientREST = clientREST;
 		this.clientMongoDB = clientMongoDB;
 		this.arretBusLigneParser = new ArretBusLigneParser(clientREST, clientMongoDB);
@@ -38,23 +38,20 @@ public class ReseauStar {
 		this.lignes = ligneStar();
 		if(this.lignes != null){
 			for(int i = 0; i < this.lignes.length - 1; i++){
-				//				System.out.println("ligne  : " + lignes[i]);
 				for(int k = 0; k < Direction.directions.length; k++){
 					this.arretBusLigneParser.execute(lignes[i], Direction.directions[k]);
 				}
 			}
 		}
-		else System.out.println("lignes nulles ");
 	}
 	public String [] ligneStar() {
+		
 		clientMongoDB.setDB("star");
-
 		DB dataBase = this.clientMongoDB.getDB();
 		DBCollection collection = dataBase.getCollection(NomCollectionMongoDB.LIGNE);
 		DBCursor dbCursor =  collection.find();
 		int lengthDbCursor = dbCursor.count();
 
-		System.out.println("Count  "+ lengthDbCursor);
 		if(lengthDbCursor == 0)
 			return null;
 
@@ -67,9 +64,10 @@ public class ReseauStar {
 		}
 		dbCursor.close();
 		return routes;
-
 	}
+	
 	public String[] makeRequeteArretBus (String route, String direction) throws URISyntaxException, HttpException, IOException{
+		
 		RequeteArretBus requeteArretBus = new RequeteArretBus();
 		requeteArretBus.addParametre("mode","line");
 		requeteArretBus.addParametre("route",route);
@@ -77,8 +75,4 @@ public class ReseauStar {
 		this.clientREST.setRequete(requeteArretBus);
 		return  LigneParser.parser(this.clientREST.execute());
 	}
-
-
-
-
 }

@@ -12,9 +12,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 public class ClientMongoDB {
 	private static String host = "localhost";
-	private static int port = 0;
 	private MongoClient mongoClient;
-	private String dBName;
 	private DB db;
 	private static ClientMongoDB clientMongoDBstatic;
 	private ClientMongoDB() throws UnknownHostException{

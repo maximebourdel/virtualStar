@@ -5,15 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.List;
+
+import maj_api_keolis.util.ArretBusAttribut;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import maj_api_keolis.util.ArretBusAttribut;
 
 import com.mongodb.BasicDBObject;
 
@@ -36,21 +34,6 @@ public class ArretBusParser {
 		catch (JSONException je){
 			return null;
 		}
-
-
-		//		try{	
-
-		//		} catch (Exception e) {
-		//			
-		//			value = departures.getJSONObject("departure");
-		//			System.out.println("catch " + value);
-		//		}
-		//		
-		//		if(value==null){
-		//			//aucune donnee 
-		//			return null;
-		//		}
-
 
 		BasicDBObject arretBusMongo = new BasicDBObject();
 		//arretBusMongo.append(ArretBusAttribut.DATE_REQUETE, jsonObject.getJSONObject("@attributes").getString("localdatetime"));
@@ -92,7 +75,13 @@ public class ArretBusParser {
 	 */
 	public static Collection<BasicDBObject> ligneParser(JSONObject jsonObject){
 		List<BasicDBObject> basicDBObjects =  new ArrayList<BasicDBObject>();
-		JSONArray json = jsonObject.getJSONArray("stopline");
+		JSONArray json ;
+		try {
+			
+			 json = jsonObject.getJSONArray("stopline");
+		} catch (Exception e) {
+			return null;
+		}
 		if(json.length()!=0){
 			
 			for (int j = 0; j < json.length(); j++) {

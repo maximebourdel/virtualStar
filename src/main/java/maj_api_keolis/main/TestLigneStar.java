@@ -4,22 +4,19 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
-
-import org.apache.http.HttpException;
-
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
 
 import maj_api_keolis.api.RequeteArretBus;
 import maj_api_keolis.mongoDB.ArretBusParser;
 import maj_api_keolis.mongoDB.ClientMongoDB;
-import maj_api_keolis.mongoDB.LigneParser;
 import maj_api_keolis.util.NomCollectionMongoDB;
+
+import org.apache.http.HttpException;
+
 import api.ClientREST;
-import api.Parametre;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
 
 public class TestLigneStar {
 
