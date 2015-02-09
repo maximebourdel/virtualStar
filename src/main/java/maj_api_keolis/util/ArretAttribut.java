@@ -2,7 +2,7 @@ package maj_api_keolis.util;
 
 public class ArretAttribut {
 	
-	public static String STOP_ID = "stop_id";
+	public static String STOP_ID = "arret_id";
 	
 	public static String CODE = "code";
 	
@@ -14,7 +14,7 @@ public class ArretAttribut {
 	
 	public static String LON = "lon";
 	
-	public static String ZONE_ID = "id";
+	public static String ZONE_ID = "zone_id";
 	
 	public static String URL = "url";
 	

@@ -2,9 +2,9 @@ package maj_api_keolis.util;
 
 public class ArretBusAttribut {
 	//stopline[i] -> stop
-	public static String ARRET = "arret";
+	public static String ARRET = "id_arret";
 	//stopline[i] -> route
-	public static String LIGNE = "ligne";
+	public static String LIGNE = "id_ligne";
 	// : localdatetime
 	public static String DATE_REQUETE = "date_requete";
 	//stopline[i] -> direction

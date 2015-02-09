@@ -37,8 +37,8 @@ public class ArretBusParser {
 
 		BasicDBObject arretBusMongo = new BasicDBObject();
 		//arretBusMongo.append(ArretBusAttribut.DATE_REQUETE, jsonObject.getJSONObject("@attributes").getString("localdatetime"));
-		arretBusMongo.append("id_arret",jsonObject.getJSONObject("stopline").getString("stop"));
-		arretBusMongo.append("id_ligne",jsonObject.getJSONObject("stopline").getString("route"));
+		arretBusMongo.append(ArretBusAttribut.ARRET,jsonObject.getJSONObject("stopline").getString("stop"));
+		arretBusMongo.append(ArretBusAttribut.LIGNE,jsonObject.getJSONObject("stopline").getString("route"));
 		arretBusMongo.append(ArretBusAttribut.DIRECTION, jsonObject.getJSONObject("stopline").getString("direction"));
 		arretBusMongo.append(ArretBusAttribut.EN_TETE, value.getJSONObject("@attributes").getString("headsign"));
 		arretBusMongo.append(ArretBusAttribut.NUM_VEHICULE, value.getJSONObject("@attributes").getString("vehicle"));
@@ -48,7 +48,7 @@ public class ArretBusParser {
 
 		try {
 
-			SimpleDateFormat sdf = new SimpleDateFormat ("YYYY-MM-dd'T'HH:mm:ss");
+			SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ssZ");
 			//conversion des strings dates en format Date
 			Date dateExpected 	= sdf.parse(value.getJSONObject("@attributes").getString("expected"));
 			Date dateReel 	= sdf.parse(value.getString("content"));
@@ -100,9 +100,9 @@ public class ArretBusParser {
 
 				BasicDBObject arretBusMongo = new BasicDBObject();
 				arretBusMongo.append(ArretBusAttribut.DATE_REQUETE, jsonObject.getJSONObject("@attributes").getString("localdatetime"));
-				arretBusMongo.append("id_arret",stopline.getString("stop"));
+				arretBusMongo.append(ArretBusAttribut.ARRET,stopline.getString("stop"));
 				System.out.println("arret : "+ stopline.getString("stop"));
-				arretBusMongo.append("id_ligne",stopline.getString("route"));
+				arretBusMongo.append(ArretBusAttribut.LIGNE,stopline.getString("route"));
 				arretBusMongo.append(ArretBusAttribut.DIRECTION, stopline.getString("direction"));
 				arretBusMongo.append(ArretBusAttribut.EN_TETE, value.getJSONObject("@attributes").getString("headsign"));
 				arretBusMongo.append(ArretBusAttribut.NUM_VEHICULE, value.getJSONObject("@attributes").getString("vehicle"));
@@ -112,7 +112,7 @@ public class ArretBusParser {
 
 				try {
 
-					SimpleDateFormat sdf = new SimpleDateFormat ("YYYY-MM-dd'T'hh:mm:ss");
+					SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ssZ");
 					//conversion des strings dates en format Date
 					Date dateExpected 	= sdf.parse(value.getJSONObject("@attributes").getString("expected"));
 					Date dateReel 	= sdf.parse(value.getString("content"));
