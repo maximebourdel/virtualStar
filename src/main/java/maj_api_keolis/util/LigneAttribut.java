@@ -3,9 +3,9 @@ package maj_api_keolis.util;
 
 public class LigneAttribut {
 
-public static String LIGNE_ID = "ligne_id";
+public static String LIGNE_ID = "id_ligne";
 	
-	public static String ID_AGENCY = "agency_id";
+	public static String ID_AGENCY = "id_agency";
 	
 	public static String ROAS_SN = "short_name";
 	
