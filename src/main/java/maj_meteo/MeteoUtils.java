@@ -11,12 +11,11 @@ public class MeteoUtils {
 	 * @return temperature converties
 	 */
 	public static double convertCelsiusKelvin(double pDegre, Boolean pConversion){
-		DecimalFormat df = new DecimalFormat("0.0");
 		if(pConversion){
 			pDegre=pDegre+273.15;
 		}else{
 			pDegre=pDegre-273.15;
 		}
-		return Double.parseDouble(df.format(pDegre));
+		return pDegre;
 	}
 }
