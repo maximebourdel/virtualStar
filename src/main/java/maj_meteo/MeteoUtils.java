@@ -18,25 +18,37 @@ public class MeteoUtils {
 	 * @return
 	 */
 	public static double convertCelsiusToOtherUnit(double pDegre,String tempUnit,Boolean pConversion){
-		switch (tempUnit) {
-		case "k":
+		if(tempUnit.equalsIgnoreCase("k")){
 			if(pConversion){
 				pDegre=pDegre+273.15;
 			}else{
 				pDegre=pDegre-273.15;
 			}
-			break;
-		case "f":
+		}else if(tempUnit.equalsIgnoreCase("f")){
 			if(pConversion){
 				pDegre=(pDegre*9/5)+32;
 			}else{
 				pDegre=(pDegre-32)*5/9;
 			}
-			break;
-		default:
-			break;
 		}
-		
+//		switch (tempUnit) {
+//		case "k":
+//			if(pConversion){
+//				pDegre=pDegre+273.15;
+//			}else{
+//				pDegre=pDegre-273.15;
+//			}
+//			break;
+//		case "f":
+//			if(pConversion){
+//				pDegre=(pDegre*9/5)+32;
+//			}else{
+//				pDegre=(pDegre-32)*5/9;
+//			}
+//			break;
+//		default:
+//			break;
+//		}
 
 		return pDegre;
 	}
