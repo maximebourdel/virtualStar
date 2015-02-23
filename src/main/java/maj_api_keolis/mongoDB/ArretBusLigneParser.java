@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import maj_api_keolis.api.RequeteArretBus;
+import maj_api_keolis.util.ArretBusAttribut;
 import maj_api_keolis.util.LigneAttribut;
 import maj_api_keolis.util.NomCollectionMongoDB;
 import maj_meteo.MeteoParser;
@@ -46,7 +47,9 @@ public class ArretBusLigneParser {
 				Iterator<BasicDBObject> it = basicDBObjects.iterator();
 				while (it.hasNext()) {
 					BasicDBObject basicDBObject = (BasicDBObject) it.next();
-
+					//Ajout du champs travaux 
+					if(isTravaux(basicDBObject.getString(LigneAttribut.LIGNE_ID)))
+						basicDBObject.append(ArretBusAttribut.TRAVAUX, "true");
 					//insertion des donnees meteo
 					basicDBObject.append("temperature", dbObjectMeteo.get("temperature"));
 					basicDBObject.append("humidite", dbObjectMeteo.get("humidite"));

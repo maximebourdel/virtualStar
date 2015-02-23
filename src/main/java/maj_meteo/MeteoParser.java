@@ -1,17 +1,6 @@
 package maj_meteo;
 
-<<<<<<< HEAD
 
-=======
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import maj_api_keolis.util.ArretBusAttribut;
-
-import org.json.JSONArray;
-import org.json.JSONException;
->>>>>>> branch 'master' of https://github.com/maximebourdel/virtualStar
 import org.json.JSONObject;
 
 import com.mongodb.BasicDBObject;

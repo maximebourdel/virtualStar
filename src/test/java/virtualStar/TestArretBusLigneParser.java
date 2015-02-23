@@ -33,7 +33,7 @@ public class TestArretBusLigneParser {
 		DB bd = clientMongoDB.getDB();
 		DBCollection collection = bd.getCollection(NomCollectionMongoDB.ARRETBUS);
 		long count = collection.count();
-	arretBusLigneParser.execute(route, direction);
+	//arretBusLigneParser.execute(route, direction);
 	Assert.assertTrue(count!=collection.count());
 	}
 

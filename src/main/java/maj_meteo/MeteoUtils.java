@@ -1,10 +1,6 @@
 package maj_meteo;
 
-<<<<<<< HEAD
 
-=======
-import java.text.DecimalFormat;
->>>>>>> branch 'master' of https://github.com/maximebourdel/virtualStar
 
 public class MeteoUtils {
 	
