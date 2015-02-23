@@ -36,7 +36,7 @@ public class MainGTFS {
 		
 		DBCollection arretDeBus = dataBase.getCollection("arret");
 		arretDeBus.drop();
-		gtfsp = new GTFSParserLigne(arretDeBus);
+		gtfsp = new GTFSParserArret(arretDeBus);
 		gtfsp.execute("GTFS_Files_Folder/stops.txt");
 		
 		clientMongoDB.close();

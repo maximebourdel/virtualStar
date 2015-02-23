@@ -9,8 +9,11 @@ import maj_api_keolis.api.RequeteArretBus;
 import maj_api_keolis.util.ArretBusAttribut;
 import maj_api_keolis.util.LigneAttribut;
 import maj_api_keolis.util.NomCollectionMongoDB;
+import maj_meteo.MeteoParser;
+import maj_meteo.MeteoREST;
 
 import org.apache.http.HttpException;
+import org.json.JSONObject;
 
 import api.ClientREST;
 
@@ -27,7 +30,7 @@ public class ArretBusLigneParser {
 		this.clientREST = clientREST;
 		this.clientMongoDB = clientMongoDB;
 	}
-	public void execute(String route, String direction){
+	public void execute(String route, String direction,BasicDBObject dbObjectMeteo){
 		System.out.println("Ligne : " + route + " Direction : " + direction);
 		RequeteArretBus requeteLigne =  new RequeteArretBus();
 		requeteLigne.addParametre("mode", "line");
@@ -44,8 +47,12 @@ public class ArretBusLigneParser {
 				Iterator<BasicDBObject> it = basicDBObjects.iterator();
 				while (it.hasNext()) {
 					BasicDBObject basicDBObject = (BasicDBObject) it.next();
-					if(isTravaux(basicDBObject.getString(LigneAttribut.LIGNE_ID)))
-						basicDBObject.append(ArretBusAttribut.TRAVAUX, "true");
+
+					//insertion des donnees meteo
+					basicDBObject.append("temperature", dbObjectMeteo.get("temperature"));
+					basicDBObject.append("pluie", dbObjectMeteo.get("pluie"));
+					basicDBObject.append("risque_neige", dbObjectMeteo.get("risque_neige"));
+					
 					this.clientMongoDB.insert(collection, basicDBObject);
 				}
 			}

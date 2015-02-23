@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import maj_api_keolis.mongoDB.ClientMongoDB;
+import maj_meteo.MeteoREST;
 
 import org.apache.http.HttpException;
 
@@ -12,7 +13,7 @@ import api.ClientREST;
 public class TestReseauStar {
 
 	public static void main(String[] args) throws URISyntaxException, HttpException, IOException {
-		ReseauStar reseauStar = new ReseauStar(new ClientREST(), ClientMongoDB.getInstance());
+		ReseauStar reseauStar = new ReseauStar(new ClientREST(), new MeteoREST(),ClientMongoDB.getInstance());
 		long start =  System.currentTimeMillis();
 		
 		reseauStar.execute();
