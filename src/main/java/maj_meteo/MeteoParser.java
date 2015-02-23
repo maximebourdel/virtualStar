@@ -30,7 +30,7 @@ public class MeteoParser {
 
 		BasicDBObject meteoMongo = new BasicDBObject();
 		meteoMongo.append("date", json.toString());
-		meteoMongo.append("temperature",MeteoUtils.convertCelsiusKelvin((temperature.getDouble("sol")), false)).toString();
+		meteoMongo.append("temperature",MeteoUtils.convertCelsiusKelvin((temperature.getDouble("2m")), false)).toString();
 		meteoMongo.append("pluie",json.getDouble("pluie"));
 		meteoMongo.append("risque_neige", json.getString("risque_neige"));
 		return meteoMongo;
