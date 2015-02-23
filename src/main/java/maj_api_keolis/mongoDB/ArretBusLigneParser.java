@@ -46,8 +46,8 @@ public class ArretBusLigneParser {
 					BasicDBObject basicDBObject = (BasicDBObject) it.next();
 					//insertion des donnees meteo
 					basicDBObject.append("temperature", dbObjectMeteo.get("temperature"));
-					basicDBObject.append("pluie", dbObjectMeteo.get("pluie"));
-					basicDBObject.append("risque_neige", dbObjectMeteo.get("risque_neige"));
+					basicDBObject.append("humidite", dbObjectMeteo.get("humidite"));
+					basicDBObject.append("meteo", dbObjectMeteo.get("meteo"));
 					
 					this.clientMongoDB.insert(collection, basicDBObject);
 				}
