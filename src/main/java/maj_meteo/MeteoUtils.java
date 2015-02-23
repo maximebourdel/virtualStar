@@ -1,6 +1,5 @@
 package maj_meteo;
 
-import java.text.DecimalFormat;
 
 public class MeteoUtils {
 	

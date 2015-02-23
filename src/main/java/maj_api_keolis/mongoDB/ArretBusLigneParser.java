@@ -6,14 +6,10 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import maj_api_keolis.api.RequeteArretBus;
-import maj_api_keolis.util.ArretBusAttribut;
 import maj_api_keolis.util.LigneAttribut;
 import maj_api_keolis.util.NomCollectionMongoDB;
-import maj_meteo.MeteoParser;
-import maj_meteo.MeteoREST;
 
 import org.apache.http.HttpException;
-import org.json.JSONObject;
 
 import api.ClientREST;
 
