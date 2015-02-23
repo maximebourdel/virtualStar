@@ -8,7 +8,14 @@ public class LigneAlert {
 	private String [] lignes;
 	private String detail;
 	private String majordisturbance;
+	private String travaux;
 	
+	public String getTravaux() {
+		return travaux;
+	}
+	public void setTravaux(String travaux) {
+		this.travaux = travaux;
+	}
 	public String getMajordisturbance() {
 		return majordisturbance;
 	}

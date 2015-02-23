@@ -25,7 +25,6 @@ public class ReseauStar {
 	private ClientMongoDB clientMongoDB;
 	private ArretBusLigneParser arretBusLigneParser;
 	private String lignes[] ;
-	private final int limite = 3;
 
 	public ReseauStar(ClientREST clientREST, ClientMongoDB clientMongoDB) {
 		new MainArretBus(clientREST, clientMongoDB);
@@ -75,4 +74,6 @@ public class ReseauStar {
 		this.clientREST.setRequete(requeteArretBus);
 		return  LigneParser.parser(this.clientREST.execute());
 	}
+	
+	
 }

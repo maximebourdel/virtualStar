@@ -48,7 +48,7 @@ public class ArretBusParser {
 
 		try {
 
-			SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ssZ");
+			SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss");
 			//conversion des strings dates en format Date
 			Date dateExpected 	= sdf.parse(value.getJSONObject("@attributes").getString("expected"));
 			Date dateReel 	= sdf.parse(value.getString("content"));
@@ -112,7 +112,7 @@ public class ArretBusParser {
 
 				try {
 
-					SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ssZ");
+					SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss");
 					//conversion des strings dates en format Date
 					Date dateExpected 	= sdf.parse(value.getJSONObject("@attributes").getString("expected"));
 					Date dateReel 	= sdf.parse(value.getString("content"));

@@ -21,4 +21,6 @@ public class ArretBusAttribut {
 	public static String PRECISION = "precision";
 	//calcul
 	public static String DIFF_TR = "diff_TR";
+	
+	public static String TRAVAUX = "travaux";
 }

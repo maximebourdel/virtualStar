@@ -44,12 +44,13 @@ public class LigneAlertParser {
 					lignes = new String[itemLines.length()];
 					for (int i = 0; i < itemLines.length(); i++) {
 						lignes[i] = (String) itemLines.get(i);
-						System.out.println(itemLines.get(i));
+						
+						//System.out.println(itemLines.get(i));
 					}
 					ligneAlert.setLignes(lignes);
 				}else{
 					String line  = lines.getString("line");
-					System.out.println(line);
+					//System.out.println(line);
 					lignes = new String[1];
 					lignes[0] = line;
 					ligneAlert.setLignes(lignes);
