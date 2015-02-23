@@ -71,4 +71,3 @@ public class GTFSParserArret implements GTFSParser{
 
 	
 }
-

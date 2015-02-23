@@ -1,6 +1,7 @@
 package maj_meteo;
 
 
+
 public class MeteoUtils {
 	
 	/**
