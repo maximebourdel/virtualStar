@@ -2,6 +2,7 @@ package maj_api_keolis.mongoDB;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -20,6 +21,7 @@ import api.ClientREST;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 public class ArretBusLigneParser {
@@ -31,12 +33,15 @@ public class ArretBusLigneParser {
 		this.clientMongoDB = clientMongoDB;
 	}
 	public void execute(String route, String direction,BasicDBObject dbObjectMeteo){
+		
 		System.out.println("Ligne : " + route + " Direction : " + direction);
+		
 		RequeteArretBus requeteLigne =  new RequeteArretBus();
 		requeteLigne.addParametre("mode", "line");
 		requeteLigne.addParametre("route", route);
 		requeteLigne.addParametre("direction",direction);
 		this.clientREST.setRequete(requeteLigne);
+		
 		try {
 
 			Collection<BasicDBObject> basicDBObjects = ArretBusParser.ligneParser(this.clientREST.execute());
@@ -45,10 +50,13 @@ public class ArretBusLigneParser {
 			DBCollection collection = db.getCollection(NomCollectionMongoDB.ARRETBUS);
 			if (basicDBObjects != null) {
 				Iterator<BasicDBObject> it = basicDBObjects.iterator();
+				//collection travaux
+				Collection<String> ligneAlerts = ligneAlert();
+				
 				while (it.hasNext()) {
 					BasicDBObject basicDBObject = (BasicDBObject) it.next();
 					//Ajout du champs travaux 
-					if(isTravaux(basicDBObject.getString(LigneAttribut.LIGNE_ID)))
+					if(ligneAlerts != null && ligneAlerts.contains(basicDBObject.getString(LigneAttribut.LIGNE_ID)))
 						basicDBObject.append(ArretBusAttribut.TRAVAUX, "true");
 					//insertion des donnees meteo
 					basicDBObject.append("temperature", dbObjectMeteo.get("temperature"));
@@ -74,8 +82,22 @@ public class ArretBusLigneParser {
 				new BasicDBObject()
 				.append(LigneAttribut.LIGNE_ID,route)
 				);
-//		System.out.println("ligne id in alert = "+(idLigne != null));
 		return (idLigne != null);
 	}
-
+	public Collection<String> ligneAlert(){
+		Collection<String> collections = new ArrayList<String>();
+		//les lignes du reseau star
+		DBCollection lignes = db.getCollection(NomCollectionMongoDB.LIGNE);
+		DBCursor cursorLignes =  lignes.find();
+		if(cursorLignes != null){
+			while (cursorLignes.hasNext()){
+				BasicDBObject ligne = (BasicDBObject) cursorLignes.next();
+				if (isTravaux(ligne.getString(LigneAttribut.LIGNE_ID))) {
+					collections.add(ligne.getString(LigneAttribut.LIGNE_ID));
+				}
+			}
+			return collections;
+		}
+		return null;
+	}
 }
