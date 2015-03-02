@@ -46,11 +46,11 @@ La commande ci-dessous vous liste les différentes actions que nous avons automa
  Voici les différentes tâches cron que nous utilisons et leurs significations :
 
 * "Exécute le fichier `scriptV4.sh` et n'écrit pas le résultat de la commande"  (effectue la collecte de données).
-    
 
-    */6  *  *  *  * sh /home/projet/executable_star/scriptV4.sh > /dev/null
+
+     */6  *  *  *  * sh /home/projet/executable_star/scriptV4.sh > /dev/null
     
- * "Exécute le fichier `mongo_save.sh`"  (effectue la sauvegarde de la base de données MongoDB tous les jours à 2h du matin).  
+* "Exécute le fichier `mongo_save.sh`"  (effectue la sauvegarde de la base de données MongoDB tous les jours à 2h du matin).  
 
 
     0  2 *  *  *  sh /home/projet/executable_star/mongo_save/mongo_save.sh
