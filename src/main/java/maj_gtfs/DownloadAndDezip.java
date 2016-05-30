@@ -11,18 +11,20 @@ import java.io.IOException;
  */
 public class DownloadAndDezip {
 
-	public static void downloadAndDezip(String pUrl){
+	public static void downloadAndDezip(String[] data){
 		//Telechargement.
-        String url = "http://data.keolis-rennes.com/fileadmin/OpenDataFiles/GTFS/GTFS-20150120.zip";
+        //String url = "http://data.keolis-rennes.com/fileadmin/OpenDataFiles/GTFS/GTFS-20150120.zip";
         System.out.println("Downloading GTFS files...");
-        Download.getFile(url);
+        //get the url
+        Download.getFile(data[0]);
 		System.out.println("...GTFS files downloaded.");
 		System.out.println("\t File name : "+Download.fileName);
 		System.out.println("\t File length : "+ Download.fileLength+ " octets");
         
 		//"Dezippage".
 		System.out.println("\n");
-		File zipfile = new File("GTFS-20150120.zip");
+		//récupération du nom du fichier ZIP
+		File zipfile = new File(data[1]);
         File folder = new File("GTFS_Files_Folder");
         System.out.println("Dezipping GTFS files...");
         try {

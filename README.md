@@ -1,12 +1,10 @@
-Projet STAR DOC
-========================
+#Projet STAR DOC
 
 Ces informations sont très importantes en cas de modifications du projet
 
 -----------------
 
-1) Bien se repérer 
-----------------------------------
+##1) Bien se repérer 
 
 Vous trouverez dans le dossier 
 
@@ -70,3 +68,48 @@ Pour plus d'informations à propos des tâches cron :
 http://doc.ubuntu-fr.org/cron
 
 (les tâches cron de Debian et Ubuntu sont configurées de la même façon).
+
+
+
+##2)L'installation/configuration du serveur
+
+
+### Installer MongoDB
+suivre tutoriel suivant :
+https://docs.mongodb.com/v3.0/tutorial/install-mongodb-on-ubuntu/
+
+###Installer Java 8
+
+####Installation
+
+As a matter of best practice we’ll update our packages:
+```sh
+$ sudo apt-add-repository ppa:webupd8team/java
+$ sudo apt-get update
+$ sudo apt-get install oracle-java8-installer
+```
+
+####Vérification
+
+Le lancement de la commande devrait donner un résultat similaire à celui-ci
+```sh
+$ java -version
+java version "1.8.0_91"
+Java(TM) SE Runtime Environment (build 1.8.0_91-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.91-b14, mixed mode)
+
+```
+
+
+java -jar "ton_programme.jar"
+
+
+###Générer le jar sur Eclipse
+
+"File"-> "Export"
+Entrer sélectionner Java/Runnable JAR file
+
+Il doit y avoir deux JAR à générer :
+
+- <b>gtfs.jar</b> qui doit pointer sur le main : <b>MainGTFS.java</b>
+- <b>call_api_v[n].jar</b> qui doit pointer sur le main : <b>App.java</b>

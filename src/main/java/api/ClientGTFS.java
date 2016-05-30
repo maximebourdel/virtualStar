@@ -84,8 +84,8 @@ public class ClientGTFS implements Client {
 	 * pour recuperer l'URL de l'archive gtfs a telecharger
 	 * @return l'url de l'archive en String
 	 */
-	public String getUrlGtfsData(){
-		String urlGtfsData="";
+	public String[] getUrlGtfsData(){
+		String urlGtfsData[] = new String[2] ;
 		//connexion a l'url
 		Document doc=urlConnection(domain);
 		if(doc!=null){
@@ -113,7 +113,11 @@ public class ClientGTFS implements Client {
 				Node nodeEnclosure=namednodeMap.getNamedItem("rel");
 				if(nodeEnclosure.getNodeValue().equalsIgnoreCase("enclosure")){
 					Node nodeHref=namednodeMap.getNamedItem("href");
-					urlGtfsData=nodeHref.getNodeValue();
+					Node nodeTtitle=namednodeMap.getNamedItem("title");
+					
+					//Stockage dans le tableau de l'url et du nom du fichier
+					urlGtfsData[0]=nodeHref.getNodeValue();
+					urlGtfsData[1]=nodeTtitle.getNodeValue();
 				}
 			}				
 		}
