@@ -4,7 +4,7 @@ Ces informations sont très importantes en cas de modifications du projet
 
 -----------------
 
-##1) Bien se repérer 
+##Bien se repérer 
 
 Vous trouverez dans le dossier 
 
@@ -61,7 +61,7 @@ La commande ci-dessous vous liste les différentes actions que nous avons automa
 *  "Exécute le jar `gtfs.jar`"  (effectue la mise à jour des données données brutes (GTFS) de la star tous les jours à 4h du matin).
 
 
-    *  0  4 *  *  *  *  java -jar /home/projet/executable_star/gtfs.jar
+    *  0  4 *  *  *  java -jar /home/projet/executable_star/gtfs.jar
     
     
 Pour plus d'informations à propos des tâches cron :
@@ -69,9 +69,9 @@ http://doc.ubuntu-fr.org/cron
 
 (les tâches cron de Debian et Ubuntu sont configurées de la même façon).
 
+-----------------
 
-
-##2)L'installation/configuration du serveur
+##L'installation/configuration du serveur
 
 
 ### Installer MongoDB
@@ -100,9 +100,9 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.91-b14, mixed mode)
 
 ```
 
+-----------------
 
-java -jar "ton_programme.jar"
-
+##Autre
 
 ###Générer le jar sur Eclipse
 
@@ -113,3 +113,25 @@ Il doit y avoir deux JAR à générer :
 
 - <b>gtfs.jar</b> qui doit pointer sur le main : <b>MainGTFS.java</b>
 - <b>call_api_v[n].jar</b> qui doit pointer sur le main : <b>App.java</b>
+
+###Générer un export des données CSV avec MongoDB
+
+se positionner dans le répertoire 
+```sh
+$ cd /home/projet/executable_star
+```
+
+Générer un export de la table arret :
+```sh
+$ mongoexport --db star --collection arret --fields _id,arret_id,code,name,desc,lat,lon,zone_id,url,location_type,parent_station,timezone,wheelchair_boarding --type=csv --out ./arret.csv
+```
+
+Générer un export de la table ligne :
+```sh
+$ mongoexport --db star --collection ligne --fields _id,id_ligne,id_agency,short_name,long_name,desc,type,url,color,text_color --type=csv --out ./ligne.csv
+```
+
+Générer un export de la table arretbus :
+```sh
+$ mongoexport --db star --collection arretbus --fields _id,date_requete,id_arret,id_ligne,direction,en_tete,num_vehicule,precision,prevu,reel,diff_TR,temperature,humidite,meteo --type=csv --out ./arretbus.csv
+```
